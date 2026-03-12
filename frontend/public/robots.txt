@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /order-success
+
+# Sitemap
+Sitemap: https://dbline.com.tr/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1

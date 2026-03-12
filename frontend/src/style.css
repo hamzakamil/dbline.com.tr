@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --page-width: 1248px;
+  --page-width-margin: 0rem;
+  /* Tema renkleri */
+  --color-primary: #121212;
+  --color-secondary: #ffffff;
+  --color-accent: #CA9C53;
+  --color-accent-dark: #A67D3D;
+  --color-background: #FFF6E6;
+  --color-header-bg: #FFF6E6;
+  --color-footer-bg: #242833;
+  --color-banner-bg: #FFE8FF;
+  --color-banner-text: #5C3D3D;
+  --color-nav-text: #121212;
+  --color-nav-hover: #CA9C53;
+  --color-dropdown-bg: #FFFAF2;
+  /* Fontlar */
+  --font-primary: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  /* Yazı boyutları */
+  --font-size-body: 16px;
+  --font-size-nav: 15px;
+  --font-size-heading: 30px;
+  --letter-spacing: 0.06rem;
+  /* Logo */
+  --logo-header-height: 80px;
+  --logo-footer-height: 56px;
+  /* Boşluklar */
+  --header-padding: 32px;
+  --nav-spacing: 28px;
+  --section-padding: 64px;
+  --product-grid-gap: 24px;
+  --dropdown-padding-top: 35px;
+  --dropdown-padding-bottom: 30px;
+  /* Düzen */
+  --product-grid-cols: 4;
+  --hero-max-height: 85vh;
+  --category-grid-cols: 3;
+  /* Buton */
+  --btn-radius: 0px;
+}
+
+@layer base {
+  body {
+    @apply font-sans m-0;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 100%;
+    min-height: 100vh;
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    font-size: var(--font-size-body);
+    letter-spacing: var(--letter-spacing);
+    line-height: 1.5;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* Sayfa içeriğini ortalayan container */
+.page-width {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (min-width: 750px) {
+  .page-width {
+    padding: 0 3rem;
+  }
+}
+
+/* Responsive grid: mobilde sabit, masaüstünde CSS değişkeni ile kontrol */
+@media (min-width: 768px) {
+  .product-grid-dynamic {
+    grid-template-columns: repeat(var(--product-grid-cols), minmax(0, 1fr));
+  }
+  .category-grid-dynamic {
+    grid-template-columns: repeat(var(--category-grid-cols), minmax(0, 1fr));
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply text-white px-6 py-3 text-sm uppercase tracking-widest transition-colors duration-300;
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--btn-radius);
+  }
+  .btn-primary:hover {
+    background-color: #374151;
+    border-color: #374151;
+  }
+  .btn-outline {
+    @apply px-6 py-3 text-sm uppercase tracking-widest transition-colors duration-300;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    border-radius: var(--btn-radius);
+  }
+  .btn-outline:hover {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+  }
+  .btn-dark {
+    @apply text-white px-6 py-3 text-sm uppercase tracking-widest transition-colors duration-300;
+    background-color: var(--color-primary);
+    border-radius: var(--btn-radius);
+  }
+  .btn-dark:hover {
+    background-color: #374151;
+  }
+  .btn-accent {
+    @apply text-white px-6 py-3 text-sm uppercase tracking-widest transition-colors duration-300;
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--btn-radius);
+  }
+  .btn-accent:hover {
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+  }
+  .input-field {
+    @apply w-full px-4 py-3 text-sm transition-colors;
+    border: 1px solid #d1d5db;
+    outline: none;
+  }
+  .input-field:focus {
+    border-color: var(--color-accent);
+  }
+  .section-title {
+    @apply font-heading text-center mb-8;
+    font-size: var(--font-size-heading);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-dark);
+}
