@@ -8,11 +8,23 @@ const connectDB = require('./config/db');
 
 const app = express();
 
-// DB bağlantısı
-connectDB();
+// DB bağlantısı (async)
+const startServer = async () => {
+  try {
+    await connectDB();
+  } catch (error) {
+    console.error('⚠️ DB bağlantısı başarısız, API devam ediyor (sadece statik rotalar çalışacak)');
+  }
 
-// Compression middleware (gzip/brotli) - SEO: Core Web Vitals performans
-app.use(compression());
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Sunucu ${PORT} portunda çalışıyor`);
+  });
+};
+
+startServer();
+
+// Compression middleware
 
 // Middleware
 app.use(cors({
@@ -52,7 +64,14 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'DB Line API çalışıyor' });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Sunucu ${PORT} portunda çalışıyor`);
+// ================= GLOBAL ERROR HANDLER =================
+app.use((err, req, res, next) => {
+  console.error('🚨 Global Error:', err.stack);
+  
+  res.status(err.status || 500).json({
+    success: false,
+    message: process.env.NODE_ENV === 'production' 
+      ? 'Sunucu hatası' 
+      : err.message
+  });
 });

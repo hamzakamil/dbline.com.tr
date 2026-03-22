@@ -6,6 +6,7 @@ const User = require('../models/User');
 const Otp = require('../models/Otp');
 const Settings = require('../models/Settings');
 const { protect } = require('../middleware/auth');
+const { authLimiter, otpLimiter } = require('../middleware/rateLimit');
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ function generateOtpCode() {
 }
 
 // Kayıt
-router.post('/register', async (req, res) => {
+router.post('/register', authLimiter, async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
 
@@ -45,7 +46,7 @@ router.post('/register', async (req, res) => {
 });
 
 // Giriş
-router.post('/login', async (req, res) => {
+router.post('/login', authLimiter, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -245,7 +246,7 @@ router.post('/checkout-register', async (req, res) => {
 });
 
 // SMS ile OTP gönder
-router.post('/send-otp', async (req, res) => {
+router.post('/send-otp', otpLimiter, async (req, res) => {
   try {
     const { email, phone } = req.body;
     if (!email || !phone) {
