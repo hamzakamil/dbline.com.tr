@@ -59,6 +59,11 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  galleryStyle: {
+    type: String,
+    enum: ['thumbnails', 'grid'],
+    default: 'thumbnails'
+  },
   rating: {
     type: Number,
     default: 0,

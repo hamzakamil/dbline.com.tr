@@ -156,12 +156,15 @@ function shareToTwitter() {
       </ol>
     </nav>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
       <!-- Sol: Galeri -->
-      <ProductGallery :images="store.product.images" />
+      <div class="lg:col-span-7 xl:col-span-8">
+        <ProductGallery :images="store.product.images" :display-style="store.product.galleryStyle || 'thumbnails'" />
+      </div>
 
       <!-- Sağ: Bilgi -->
-      <div>
+      <div class="lg:col-span-5 xl:col-span-4 sticky top-24">
+        <div class="max-w-md">
         <h1 class="text-2xl font-heading mb-2">{{ localized(store.product.name) }}</h1>
 
         <!-- Yıldızlar -->
@@ -304,6 +307,7 @@ function shareToTwitter() {
             </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
 

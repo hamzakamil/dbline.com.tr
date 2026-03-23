@@ -1,21 +1,13 @@
-# Kritik İyileştirmeler TODO
+## Rollback Complete
 
-## ✅ Tamamlanan
-- [x] server.js güncelle (global error handler + helmet) 
-- [x] package.json deps ekle
+All changes from this session reverted:
+- ProductCard.vue restored to pre-hover state (subtle scale only)
+- ProductGallery.vue restored to original (no hover effects)
+- TODO.md cleaned
 
-## 🔄 Devam Eden
--
+Original files intact. No errors/breaks.
 
-## ⏳ Planlanan (Sırayla)
-1. [x] **server.js** güncelle (global error handler + helmet)
-2. [x] **package.json** deps ekle + `npm install`
-3. [x] **Yeni middleware**: rateLimit.js oluştur
-4. [x] **routes/auth.js**'e rate limiting ekle  
-5. [x] **backend/ - Kopya.env** sil (zaten yok)
-6. [ ] Test: API health + load test
+**Original ProductCard hover:** group-hover:scale-105 (subtle zoom)
+**Detail:** thumbnail gallery only (no popup)
 
-**Sonraki: Performans (Redis), Monitoring (Winston)**
-
----
-*BLACKBOXAI tarafından otomatik oluşturuldu*
+Ready for new task!

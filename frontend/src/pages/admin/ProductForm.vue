@@ -25,6 +25,7 @@ const form = ref({
   stock: 0,
   featured: false,
   active: true,
+  galleryStyle: 'thumbnails',
   images: []
 })
 
@@ -42,7 +43,12 @@ async function fetchProduct() {
   if (!isEdit.value) return
   try {
     const { data } = await api.get(`/products/${route.params.id}`)
-    form.value = { ...data, variants: data.variants || [] }
+    form.value = { 
+      ...data, 
+      category: data.category?._id || data.category || '',
+      variants: data.variants || [],
+      galleryStyle: data.galleryStyle || 'thumbnails'
+    }
   } catch (error) {
     console.error(error)
   }
@@ -218,7 +224,7 @@ onMounted(async () => {
               </select>
             </div>
           </div>
-          <div class="flex gap-6 mt-4">
+          <div class="flex items-center gap-6 mt-4">
             <label class="flex items-center gap-2 text-sm">
               <input v-model="form.featured" type="checkbox" />
               {{ locale === 'tr' ? 'Öne Çıkan' : 'Featured' }}
@@ -227,6 +233,13 @@ onMounted(async () => {
               <input v-model="form.active" type="checkbox" />
               {{ locale === 'tr' ? 'Aktif' : 'Active' }}
             </label>
+            <div class="flex items-center gap-2 ml-auto">
+              <label class="text-xs text-gray-500">{{ locale === 'tr' ? 'Galeri Stili:' : 'Gallery Style:' }}</label>
+              <select v-model="form.galleryStyle" class="border border-gray-200 px-3 py-1 text-sm focus:outline-none focus:border-primary">
+                <option value="thumbnails">{{ locale === 'tr' ? 'Klasik (Küçük Resimli)' : 'Classic (Thumbnails)' }}</option>
+                <option value="grid">{{ locale === 'tr' ? 'Izgara (Geniş)' : 'Grid (Wide)' }}</option>
+              </select>
+            </div>
           </div>
         </div>
 

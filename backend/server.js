@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
 const path = require('path');
-require('dotenv').config();
+require('dotenv').config({ path: process.env.NODE_ENV === 'local' ? '.env.local' : '.env' });
 
 const connectDB = require('./config/db');
 
